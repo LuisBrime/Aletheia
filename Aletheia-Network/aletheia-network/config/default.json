@@ -1,0 +1,12 @@
+{
+  "aletheia-network" : {
+     "participantId" : "admin",
+     "participantPwd" :"adminpw",
+     "businessNetworkIdentifier" : "aletheia-network",
+     "connectionProfile" : "hlfv1"
+  },
+  "mongo-connection" : {
+    "mongoURI": "mongodb://localhost:27017/",
+    "mongoDatabase" : "Aletheia"
+  }
+}
