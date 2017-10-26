@@ -1,0 +1,74 @@
+/*******************************************
+*********HYPERLEDGER COMPOSER RULES*********
+********************************************/
+
+rule SystemACL {
+  description:  "System ACL to permit all access"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.**"
+  action: ALLOW
+}
+
+rule NetworkAdminUser {
+    description: "Grant business network administrators full access to user resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "**"
+    action: ALLOW
+}
+
+rule NetworkAdminSystem {
+    description: "Grant business network administrators full access to system resources"
+    participant: "org.hyperledger.composer.system.NetworkAdmin"
+    operation: ALL
+    resource: "org.hyperledger.composer.system.**"
+    action: ALLOW
+}
+
+/*******************************************
+***********ALETHEIA NETWORK RULES***********
+********************************************/
+
+rule AutorizarContratoTransaccion {
+  description: "Permitir a Cuentahabiente hacer una transaccion de autorizacion de contrato"
+  participant: "org.aabo.aletheia.Cuentahabiente"
+  operation: CREATE
+  resource: "org.aabo.aletheia.autorizar"
+  action: ALLOW
+}
+
+rule RevocarContratoTransaccion {
+  description: "Permitir a Cuentahabiente hacer una transaccion de revocacion de contrato"
+  participant: "org.aabo.aletheia.Cuentahabiente"
+  operation: CREATE
+  resource: "org.aabo.aletheia.revocar"
+  action: ALLOW
+}
+
+rule AccesoIdentidadPropia {
+  description: "Permitir a Cuentahabiente acceso a su identidad"
+  participant(p): "org.aabo.aletheia.Cuentahabiente"
+  operation: READ, UPDATE
+  resource(r): "org.aabo.aletheia.Cuentahabiente"
+  condition: (r.getIdentifier() == p.getIdentifier())
+  action: ALLOW
+}
+
+rule AdministradorAletheia {
+  description: ""
+  participant: "org.aabo.aletheia.Administrador"
+  operation: ALL
+  resource: "org.aabo.aletheia.**"
+  action: ALLOW
+}
+
+rule ClienteCreaIdentidades {
+  description: ""
+  participant(c): "org.aabo.aletheia.Cliente"
+  operation: CREATE
+  resource: "org.aabo.aletheia.identidad"
+  resource: "org.aabo.aletheia.Cuentahabiente"
+  condition: (c.permisosDeCliente.createIdentidades)
+  action: ALLOW
+}
