@@ -17,3 +17,4 @@ composer network deploy -a dist/aletheia-network -p hlfv1 -i PeerAdmin -s random
 
 #Echo poop
 echo Aletheia Deployed
+a
