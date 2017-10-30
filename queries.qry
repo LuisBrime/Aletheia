@@ -1,0 +1,19 @@
+query selectCuentahabiente {
+  description: "Ver información de cuentahabiente si se tiene acceso"
+  statement:
+      SELECT org.aabo.Cuentahabiente
+          WHERE (_$chID == codigoBanorte)
+}
+
+query selectAllClientes {
+  description: "Ver información de todos los clientes"
+  statement:
+      SELECT org.aabo.Cliente
+}
+
+query selectCliente {
+  description: "Ver información de un cliente"
+  statement:
+      SELECT org.aabo.Cliente
+          WHERE (_$cID == clienteKey)
+}

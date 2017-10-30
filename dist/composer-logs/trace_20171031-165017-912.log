@@ -1,0 +1,2 @@
+2017-10-30T22:50:33.997Z ERROR   HLFConnectionManager    :fabric-client()          [client-utils.js]: sendPeersProposal - Promise is rejected: Error: chaincode error (status: 500, message: Error installing chaincode code aletheia-network:0.14.2(chaincode /var/hyperledger/production/chaincodes/aletheia-network.0.14.2 exists))
+    at /usr/local/lib/node_modules/composer-cli/node_modules/grpc/src/node/src/client.js:554:15 {}$

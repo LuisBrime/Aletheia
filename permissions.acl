@@ -65,11 +65,3 @@ rule AccesoClienteCuentahabiente {
     condition: (r.autorizados && r.autorizados.indexOf(p.getIdentifier()) > -1)
     action: ALLOW
 }
-
-rule AdministradorAletheia {
-   description: ""
-   participant: "org.aabo.Administrador"
-   operation: ALL
-   resource: "org.aabo.**"
-   action: ALLOW
-}

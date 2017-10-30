@@ -1,6 +1,6 @@
 {
   "name": "aletheia-network",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Aletheia Identity Network",
   "author": "Aabo Technologies© 2017",
   "main": "index.js",
