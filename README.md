@@ -23,7 +23,7 @@ Check out the full installation process of the [prerequisites](https://hyperledg
 ### 1. Clone the repo
 Clone `Aletheia-Network` code locally with the command:
 ```
-git clone https://github.com/LuisBrime/Aletheia
+git clone https://github.com/LuisBrime/Aletheia.git
 ```
 
 ### 2. Setup Fabric
