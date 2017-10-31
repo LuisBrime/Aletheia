@@ -22,44 +22,60 @@ Check out the full installation process of the [prerequisites](https://hyperledg
 
 ### 1. Clone the repo
 Clone `Aletheia-Network` code locally with the command:
-    `git clone https://github.com/LuisBrime/Aletheia`
+```
+git clone https://github.com/LuisBrime/Aletheia
+```
 
 ### 2. Setup Fabric
 Kill, remove existing containers and remove previous Hyperledger Fabric chaincode images:
-    `docker kill $(docker ps -q)`
-    `docker rm $(docker ps -aq)`
-    `docker rmi $(docker images dev-* -q)`
+```
+docker kill $(docker ps -q)
+docker rm $(docker ps -aq)
+docker rmi $(docker images dev-* -q)
+```
 
 Setup Hyperledger Fabric version:
-    `export FABRIC_VERSION=hlfv1`
+```
+export FABRIC_VERSION=hlfv1
+```
 
 Start and create profile in fabric-tools directory:
-    `cd fabric-tools/`
-    `./downloadFabric.sh`
-    `./startFabrich.sh`
-    `/createProfile.sh`
+```
+cd fabric-tools/
+./downloadFabric.sh
+./startFabrich.sh
+/createProfile.sh
+```
 
 ### 3. Generate Business Network Archive
 Generate the Business Network Archive (.bna) from the root directory.
-    `cd aletheia-network/`
-    `npm install`
-    `composer archive create -a dist/aletheia-network.bna --sourceType dir --sourceName .`
+```
+cd aletheia-network/
+npm install
+composer archive create -a dist/aletheia-network.bna --sourceType dir --sourceName .
+```
 
 Now the `aletheia-network.bna` is created in the `dist` folder
 
 ### 4. Deploy to Fabric
 Deploy the .bna file to Hyperledger Fabric:
-    `cd dist`
-    `composer network deploy -a aletheia-network.bna -p hlfv1 -i PeerAdmin -s randomString -A admin -S`
+```
+cd dist
+composer network deploy -a aletheia-network.bna -p hlfv1 -i PeerAdmin -s randomString -A admin -S
+```
 
 Verify that it was deployed with:
-    `composer network ping -n aletheia-network -p hlfv1 -i admin -s adminpw`
+```
+composer network ping -n aletheia-network -p hlfv1 -i admin -s adminpw
+```
 
 ### 5. (OPTIONAL) Test in Hyperledger Playground
 `Note: [Playground](https://hyperledger.github.io/composer/tutorials/playground-guide.html) should be [installed](https://hyperledger.github.io/composer/installing/using-playground-locally.html)`
 
 Start Playground locally:
-    `composer-playground`
+```
+composer-playground
+```
 
 Deploy a new Business Network, name it, choose to upload a new one and select `aletheia-network.bna`
 
@@ -68,9 +84,10 @@ Deploy a new Business Network, name it, choose to upload a new one and select `a
 
 ### 7. Stop and/or teardown Fabric
 To stop and/or teardown Fabric, use the following commands:
-    `cd ~/fabric-tools`
-    `./stopFabric.sh`
-    `./teardownFabric.sh`
+```
+cd ~/fabric-tools
+./stopFabric.sh
+./teardownFabric.sh
+```
 
-
-> :shipit:  Enjoy   :shipit:
+>:shipit:  Enjoy   :shipit:
