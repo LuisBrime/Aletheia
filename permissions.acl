@@ -28,8 +28,7 @@ rule NetworkAdminSystem {
 
 /*******************************************
 ***********ALETHEIA NETWORK RULES***********
-********************************************
-Causes errors when compiling into a .bna file*/
+*********************************************/
 
 
 rule AutorizarContratoTransaccion {
@@ -63,5 +62,21 @@ rule AccesoClienteCuentahabiente {
     operation: READ, UPDATE
     resource(r): "org.aabo.Cuentahabiente"
     condition: (r.autorizados && r.autorizados.indexOf(p.getIdentifier()) > -1)
+    action: ALLOW
+}
+
+rule AdminClientes {
+    description: "Permite al administrador todas las acciones sobre clientes"
+    participant: "org.aabo.Administrador"
+    operation: ALL
+    resource: "org.aabo.Cliente"
+    action: ALLOW
+}
+
+rule AdminCuentahabientes {
+    description: "Permite al administrador todas las acciones menos leer sobre cuentahabientes"
+    participant: "org.aabo.Administrador"
+    operation: CREATE, DELETE, UPDATE
+    resource: "org.aabo.Cuentahabiente"
     action: ALLOW
 }
