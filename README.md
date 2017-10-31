@@ -70,7 +70,7 @@ composer network ping -n aletheia-network -p hlfv1 -i admin -s adminpw
 ```
 
 ### 5. (OPTIONAL) Test in Hyperledger Playground
-`Note: [Playground](https://hyperledger.github.io/composer/tutorials/playground-guide.html) should be [installed](https://hyperledger.github.io/composer/installing/using-playground-locally.html)`
+*Note: [Playground](https://hyperledger.github.io/composer/tutorials/playground-guide.html) should be [installed](https://hyperledger.github.io/composer/installing/using-playground-locally.html)*
 
 Start Playground locally:
 ```
