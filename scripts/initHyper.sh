@@ -10,11 +10,13 @@ sudo npm install
 mkdir dist
 
 #Compile the file
-composer archive create -a dist/aletheia-network --sourceType dir --sourceName .
+composer archive create -a dist/aletheia-network.bna --sourceType dir --sourceName .
+
+#Change directory
+cd dist
 
 #Deploy
-composer network deploy -a dist/aletheia-network -p hlfv1 -i PeerAdmin -s randomString -A admin -S
+composer network deploy -a dist/aletheia-network.bna -p hlfv1 -i PeerAdmin -s randomString -A admin -S
 
 #Echo poop
-echo Aletheia Deployed
-a
+composer network ping -n aletheia-network -p hlfv1 -i admin -s adminpw
