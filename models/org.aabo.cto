@@ -11,23 +11,19 @@ namespace org.aabo
 participant Cuentahabiente identified by codigoBanorte {
   o String codigoBanorte
   o String nombre
-  o String curp //regex = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9][12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/
-  o String email //regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  o String curp
+  o String email 
   o Domicilio domicilio
   o DateTime fechaNacimiento
   o String telefono
-  o String[] autorizados optional
-  //--> identidad suIdentidad
-  //o Bloque[] bloquesDeIdentidad
+  //o String[] autorizados optional
+  o Bloque[] bloquesDeIdentidad optional
 }
 
 participant Cliente identified by clienteKey {
   o String clienteKey
   o String nombreDeCliente
   o Domicilio domicilioDeCliente
-  //--> identidad[] identidadesConAcceso
-  //o Bloque[] bloquesDeCliente
-  //o PermisosParaCliente permisosDeCliente
 }
 
 participant Administrador identified by adminKey extends Cliente {
@@ -38,29 +34,10 @@ participant Administrador identified by adminKey extends Cliente {
 *****************CONCEPTOS******************
 ********************************************/
 
-/*
-concept Bloque {
-  o String value1
-  o String value2
-  o String value3
-  o String value4
-}
 
-concept PermisosParaCliente {
-  o Boolean createIdentidades
-  o Boolean createClientes
-  o Boolean createBloques
-  o Boolean readIdentidades
-  o Boolean readClientes
-  o Boolean readBloques
-  o Boolean updateIdentidades
-  o Boolean updateClientes
-  o Boolean updateBloques
-  o Boolean deletIdentidades
-  o Boolean deletClientes
-  o Boolean deletBloques
+concept Bloque {
+  o String name
 }
-*/
 
 concept Domicilio {
   o String calle 
@@ -74,20 +51,22 @@ concept Domicilio {
 *******************ASSETS*******************
 ********************************************/
 
-/*
-asset identidad identified by identidadKey {
-  o String identidadKey
-  --> Cuentahabiente duenio
+asset contrato identified by contratoKey {
+  o String contratoKey
+  o String chID
+  o DateTime endDate optional
+  o String[] data optional
+  o String[] autorizados optional
 }
-*/
 
 /*******************************************
 ****************TRANSACCIONES***************
 ********************************************/
 
 abstract transaction contratoIdentidad {
-  //--> identidad nuevaIdentidadCuentahabiente
   o String cID
+  o String[] nInfo
+  --> contrato c
 }
 
 transaction autorizar extends contratoIdentidad {

@@ -47,6 +47,23 @@ rule RevocarContratoTransaccion {
    action: ALLOW
 }
 
+rule CrearContrato {
+   description: "Permite a Cuentahabiente crear un contrato"
+   participant: "org.aabo.Cuentahabiente"
+   operation: CREATE
+   resource: "org.aabo.contrato"
+   action: ALLOW
+}
+
+rule AccesoContratoIdentidadPropia {
+   description: "Permitir a Cuentahabiente acceso a su contrato de identidad"
+   participant(p): "org.aabo.Cuentahabiente"
+   operation: READ, DELETE, UPDATE
+   resource(r): "org.aabo.contrato"
+   condition: (r.chID == p.getIdentifier())
+   action: ALLOW
+}
+
 rule AccesoIdentidadPropia {
    description: "Permitir a Cuentahabiente acceso a su identidad"
    participant(p): "org.aabo.Cuentahabiente"
@@ -60,7 +77,7 @@ rule AccesoClienteCuentahabiente {
     description: "Permite a los Clientes que tengan autorizado accesar a la información de un Cuentahabiente"
     participant(p): "org.aabo.Cliente"
     operation: READ, UPDATE
-    resource(r): "org.aabo.Cuentahabiente"
+    resource(r): "org.aabo.contrato"
     condition: (r.autorizados && r.autorizados.indexOf(p.getIdentifier()) > -1)
     action: ALLOW
 }

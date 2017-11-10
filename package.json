@@ -35,5 +35,9 @@
     "prettyoutput": "^1.1.1",
     "yargs": "^6.5.0",
     "cli-table": "latest"
+  },
+  "devDependencies": {
+    "chai" : "*",
+    "mocha" : "*"
   }
 }
