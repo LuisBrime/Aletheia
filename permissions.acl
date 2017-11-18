@@ -47,6 +47,22 @@ rule RevocarContratoTransaccion {
    action: ALLOW
 }
 
+rule CambiarFechaContratoTransaccion {
+   description: "Permitir a Cuentahabiente hacer una transaccion de cambio de fecha de contrato"
+   participant: "org.aabo.Cuentahabiente"
+   operation: CREATE
+   resource: "org.aabo.cambiarFecha"
+   action: ALLOW
+}
+
+rule AgregarInfoContratoTransaccion {
+   description: "Permitir a Cliente hacer una transaccion para agregar info a un contrato"
+   participant: "org.aabo.Cliente"
+   operation: CREATE
+   resource: "org.aabo.agregarInfo"
+   action: ALLOW
+}
+
 rule CrearContrato {
    description: "Permite a Cuentahabiente crear un contrato"
    participant: "org.aabo.Cuentahabiente"
@@ -64,6 +80,14 @@ rule AccesoContratoIdentidadPropia {
    action: ALLOW
 }
 
+rule AccesoCliente {
+   description: "Permitir a Cliente acceso a su información"
+   participant: "org.aabo.Cliente"
+   operation: READ
+   resource: "org.aabo.Cliente"
+   action: ALLOW
+}
+
 rule AccesoIdentidadPropia {
    description: "Permitir a Cuentahabiente acceso a su identidad"
    participant(p): "org.aabo.Cuentahabiente"
@@ -78,7 +102,7 @@ rule AccesoClienteCuentahabiente {
     participant(p): "org.aabo.Cliente"
     operation: READ, UPDATE
     resource(r): "org.aabo.contrato"
-    condition: (r.autorizados && r.autorizados.indexOf(p.getIdentifier()) > -1)
+    condition: ((r.autorizados && r.autorizados.indexOf(p.getIdentifier()) > -1) && !(new Date() > new Date(r.endDate)))
     action: ALLOW
 }
 

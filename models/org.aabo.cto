@@ -24,6 +24,7 @@ participant Cliente identified by clienteKey {
   o String clienteKey
   o String nombreDeCliente
   o Domicilio domicilioDeCliente
+  //o String[] autorizados optional
 }
 
 participant Administrador identified by adminKey extends Cliente {
@@ -75,10 +76,28 @@ transaction autorizar extends contratoIdentidad {
 transaction revocar extends contratoIdentidad {
 }
 
+transaction cambiarFecha {
+  o DateTime nuevaFecha
+  --> contrato c
+}
+
+transaction agregarInfo {
+  o String[] nuevaInfo
+  --> contrato c
+}
+
 /*******************************************
 *******************EVENTS*******************
 ********************************************/
 
 event EventoContrato {
   o contratoIdentidad contratoIdentidad
+}
+
+event EventoFecha {
+  o cambiarFecha cambiarFecha
+}
+
+event EventoInfo {
+  o agregarInfo agregarInfo
 }
