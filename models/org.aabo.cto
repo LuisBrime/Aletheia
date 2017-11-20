@@ -16,15 +16,13 @@ participant Cuentahabiente identified by codigoBanorte {
   o Domicilio domicilio
   o DateTime fechaNacimiento
   o String telefono
-  //o String[] autorizados optional
-  //o Bloque[] bloquesDeIdentidad optional
 }
 
 participant Cliente identified by clienteKey {
   o String clienteKey
   o String nombreDeCliente
   o Domicilio domicilioDeCliente
-  //o String[] autorizados optional
+  o Boolean[] permisos // [CREAR CH, VER CH, EDITAR CH, BORRAR CH, CREAR BL]
 }
 
 participant Administrador identified by adminKey extends Cliente {
@@ -34,11 +32,6 @@ participant Administrador identified by adminKey extends Cliente {
 /*******************************************
 *****************CONCEPTOS******************
 ********************************************/
-
-
-//concept Bloque {
-//  o String name
-//}
 
 concept BloqueInfo {
   o String nombre

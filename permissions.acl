@@ -60,9 +60,10 @@ rule CambiarFechaContratoTransaccion {
 
 rule AgregarInfoContratoTransaccion {
    description: "Permitir a Cliente hacer una transaccion para agregar info a un contrato"
-   participant: "org.aabo.Cliente"
+   participant(p): "org.aabo.Cliente"
    operation: CREATE
    resource: "org.aabo.agregarInfo"
+   condition: (p.permisos[2])
    action: ALLOW
 }
 
@@ -80,17 +81,19 @@ rule CrearContrato {
 
 rule CrearBloque {
   description: "Permite a Cliente crear un bloque"
-  participant: "org.aabo.Cliente"
+  participant(p): "org.aabo.Cliente"
   operation: CREATE
   resource: "org.aabo.bloque"
+  condition: (p.permisos[4])
   action: ALLOW
 }
 
 rule AgregarBloqueTransaccion {
   description: "Permite a Cliente agregar un bloque a un Cuentahabiente"
-  participant: "org.aabo.Cliente"
+  participant(p): "org.aabo.Cliente"
   operation: CREATE
   resource: "org.aabo.agregarBloque"
+  condition: (p.permisos[4])
   action: ALLOW
 }
 
@@ -127,9 +130,10 @@ rule AccesoContratoIdentidadPropia {
 
 rule AccesoCliente {
    description: "Permitir a Cliente acceso a su información"
-   participant: "org.aabo.Cliente"
+   participant(p): "org.aabo.Cliente"
    operation: READ
-   resource: "org.aabo.Cliente"
+   resource(r): "org.aabo.Cliente"
+   condition: (p.getIdentifier() == r.getIdentifier())
    action: ALLOW
 }
 
@@ -145,9 +149,9 @@ rule AccesoIdentidadPropia {
 rule AccesoClienteCuentahabiente {
     description: "Permite a los Clientes que tengan autorizado accesar a la información de un Cuentahabiente"
     participant(p): "org.aabo.Cliente"
-    operation: READ, UPDATE
+    operation: READ
     resource(r): "org.aabo.contrato"
-    condition: ((r.autorizados && r.autorizados.indexOf(p.getIdentifier()) > -1) && !(new Date() > new Date(r.endDate)))
+    condition: ((r.autorizados && r.autorizados.indexOf(p.getIdentifier()) > -1) && !(new Date() > new Date(r.endDate)) && p.permisos[1])
     action: ALLOW
 }
 
@@ -178,4 +182,22 @@ rule AdminCuentahabientes {
     operation: CREATE, DELETE, UPDATE
     resource: "org.aabo.Cuentahabiente"
     action: ALLOW
+}
+
+rule CrearCuentahabiente {
+  description: "Permite a Cliente crear Cuentahabiente si tiene permiso"
+  participant(p): "org.aabo.Cliente"
+  operation: CREATE
+  resource: "org.aabo.Cuentahabiente"
+  condition: (p.permisos[0])
+  action: ALLOW
+}
+
+rule BorrarCuentahabiente {
+  description: "Permite a Cliente borrar Cuentahabiente si tiene permiso"
+  participant(p): "org.aabo.Cliente"
+  operation: DELETE
+  resource: "org.aabo.Cuentahabiente"
+  condition: (p.permisos[3])
+  action: ALLOW
 }
