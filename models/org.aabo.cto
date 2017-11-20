@@ -17,7 +17,7 @@ participant Cuentahabiente identified by codigoBanorte {
   o DateTime fechaNacimiento
   o String telefono
   //o String[] autorizados optional
-  o Bloque[] bloquesDeIdentidad optional
+  //o Bloque[] bloquesDeIdentidad optional
 }
 
 participant Cliente identified by clienteKey {
@@ -36,8 +36,13 @@ participant Administrador identified by adminKey extends Cliente {
 ********************************************/
 
 
-concept Bloque {
-  o String name
+//concept Bloque {
+//  o String name
+//}
+
+concept BloqueInfo {
+  o String nombre
+  o String data
 }
 
 concept Domicilio {
@@ -58,11 +63,26 @@ asset contrato identified by contratoKey {
   o DateTime endDate optional
   o String[] data optional
   o String[] autorizados optional
+  --> bloque[] bloques optional
+}
+
+asset bloque identified by bloqueKey {
+  o String bloqueKey
+  o String nombre
+  o String chID optional
+  o String cID
+  o Boolean visibleCh 
+  o Boolean editableCh
+  o BloqueInfo[] info optional
 }
 
 /*******************************************
 ****************TRANSACCIONES***************
 ********************************************/
+
+/**
+ * De contratos
+ */
 
 abstract transaction contratoIdentidad {
   o String cID
@@ -86,6 +106,16 @@ transaction agregarInfo {
   --> contrato c
 }
 
+/**
+ * De bloques
+ */
+
+transaction agregarBloque {
+  --> bloque b
+  --> contrato c
+  o BloqueInfo[] info
+}
+
 /*******************************************
 *******************EVENTS*******************
 ********************************************/
@@ -100,4 +130,8 @@ event EventoFecha {
 
 event EventoInfo {
   o agregarInfo agregarInfo
+}
+
+event EventoBloque {
+  o agregarBloque agregarBloque
 }

@@ -30,6 +30,9 @@ rule NetworkAdminSystem {
 ***********ALETHEIA NETWORK RULES***********
 *********************************************/
 
+/**
+* Reglas sobre transacciones y activos
+**/
 
 rule AutorizarContratoTransaccion {
    description: "Permitir a Cuentahabiente hacer una transaccion de autorizacion de contrato"
@@ -71,6 +74,48 @@ rule CrearContrato {
    action: ALLOW
 }
 
+/**
+* Reglas sobre bloques
+**/
+
+rule CrearBloque {
+  description: "Permite a Cliente crear un bloque"
+  participant: "org.aabo.Cliente"
+  operation: CREATE
+  resource: "org.aabo.bloque"
+  action: ALLOW
+}
+
+rule AgregarBloqueTransaccion {
+  description: "Permite a Cliente agregar un bloque a un Cuentahabiente"
+  participant: "org.aabo.Cliente"
+  operation: CREATE
+  resource: "org.aabo.agregarBloque"
+  action: ALLOW
+}
+
+rule VerBloque {
+  description: "Permite a Cuentahabiente ver un bloque si tiene permiso"
+  participant(p): "org.aabo.Cuentahabiente"
+  operation: READ
+  resource(r): "org.aabo.bloque"
+  condition: ((p.getIdentifier() == r.chID) && r.visibleCh)
+  action: ALLOW
+}
+
+rule EditarBloque {
+  description: "Permite a Cuentahabiente editar un bloque si tiene permiso"
+  participant(p): "org.aabo.Cuentahabiente"
+  operation: UPDATE
+  resource(r): "org.aabo.bloque"
+  condition: ((p.getIdentifier() == r.chID) && r.visibleCh && r.editableCh)
+  action: ALLOW
+}
+
+/**
+* Reglas sobre acceso
+**/
+
 rule AccesoContratoIdentidadPropia {
    description: "Permitir a Cuentahabiente acceso a su contrato de identidad"
    participant(p): "org.aabo.Cuentahabiente"
@@ -105,6 +150,19 @@ rule AccesoClienteCuentahabiente {
     condition: ((r.autorizados && r.autorizados.indexOf(p.getIdentifier()) > -1) && !(new Date() > new Date(r.endDate)))
     action: ALLOW
 }
+
+rule AccesoBloquePropio {
+  description: "Permitir a Cliente acceso a sus bloques"
+  participant(p): "org.aabo.Cliente"
+  operation: READ, UPDATE, DELETE
+  resource(r): "org.aabo.bloque"
+  condition: (p.getIdentifier() == r.cID)
+  action: ALLOW
+}
+
+/**
+* Reglas sobre accesos de administrador
+**/
 
 rule AdminClientes {
     description: "Permite al administrador todas las acciones sobre clientes"

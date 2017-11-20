@@ -1,7 +1,7 @@
 {
-  "name": "angular-app",
+  "name": "aletheia-network",
   "description": "Hyperledger Composer Angular project",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Luis Brime",
   "email": "brimegmz@gmail.com",
   "license": "Apache-2.0",

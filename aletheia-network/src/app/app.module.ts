@@ -9,13 +9,18 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 // import { TransactionComponent } from './Transaction/Transaction.component'
 
+import { contratoComponent } from './contrato/contrato.component';
+import { bloqueComponent } from './bloque/bloque.component';
 
 @NgModule({
   declarations: [
     AppComponent,
 		HomeComponent,
     // TransactionComponent,
-    
+    contratoComponent,
+		
+    bloqueComponent
+		
   ],
   imports: [
     BrowserModule,
