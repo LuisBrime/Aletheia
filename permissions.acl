@@ -149,7 +149,7 @@ rule AccesoIdentidadPropia {
 rule AccesoClienteCuentahabiente {
     description: "Permite a los Clientes que tengan autorizado accesar a la información de un Cuentahabiente"
     participant(p): "org.aabo.Cliente"
-    operation: READ
+    operation: READ, UPDATE
     resource(r): "org.aabo.contrato"
     condition: ((r.autorizados && r.autorizados.indexOf(p.getIdentifier()) > -1) && !(new Date() > new Date(r.endDate)) && p.permisos[1])
     action: ALLOW

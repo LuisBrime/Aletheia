@@ -4,20 +4,6 @@
   "description": "Aletheia Identity Network",
   "author": "Aabo Technologies© 2017",
   "main": "index.js",
-  "scripts": {
-    "preinstall": "composer --version || { echo 'Please first run npm install -g composer-cli'; exit 1;} ",
-    "test": "echo 'run the automated tests here'",
-    "startHLF": "scripts/start-hyperledger.sh",
-    "stopHLF": "scripts/stop-hyperledger.sh",
-    "teardownHLF": "scripts/teardown.sh",
-    "install": "scripts/download-hyperledger.sh && scripts/start-hyperledger.sh && npm run deployNetwork",
-    "start": "node index.js",
-    "first-step": "scripts/aletheiaInstaller-1.sh",
-    "second-step": "scripts/aletheiaInstaller-2.sh",
-    "deployNetwork": "scripts/initHyper.sh",
-    "ping": "composer network ping -n aletheia-network -p hlfv1 -i admin -s adminpw",
-    "restartNetwork": "scripts/restartNetwork.sh"
-  },
   "keywords": [
     "Blockchain",
     "Solutions",
@@ -25,19 +11,47 @@
     "getting-started",
     "Hyperledger Composer"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LuisBrime/Aletheia.git"
+  },
+	"scripts": {
+		"prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/aletheia-network.bna",
+		"ping": "composer network ping -n aletheia-network -p hlfv1 -i admin -s adminpw"
+	},
   "license": "Apache-2.0",
   "dependencies": {
-    "digitalproperty-network": "latest",
-    "composer-client": "latest",
+    "angular": "^1.6.6",
+    "cli-table": "latest",
     "config": "^1.21.0",
+    "digitalproperty-network": "latest",
+    "prettyoutput": "^1.1.1",
     "shelljs": "^0.7.5",
     "winston": "^2.2.0",
-    "prettyoutput": "^1.1.1",
-    "yargs": "^6.5.0",
-    "cli-table": "latest"
+    "yargs": "^6.5.0"
   },
   "devDependencies": {
-    "chai" : "*",
-    "mocha" : "*"
+    "@angular/cli": "latest",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
+    "composer-admin": "^0.14.0-0",
+    "composer-cli": "^0.14.0-0",
+    "composer-client": "^0.14.0-0",
+    "composer-connector-embedded": "^0.14.0-0",
+    "composer-cucumber-steps": "^0.14.0-0",
+    "cucumber": "^2.2.0",
+    "mkdirp": "^0.5.1",
+    "mocha": "^3.2.0",
+    "browserfs": "^1.2.0",
+    "@angular/core": "latest",
+    "eslint": "^3.6.1",
+    "istanbul": "^0.4.5",
+    "jsdoc": "^3.5.5",
+    "license-check": "^1.1.5",
+    "moment": "^2.17.1",
+		"prettyoutput": "^1.1.1",
+    "yargs": "^6.5.0",
+    "cli-table": "latest", 
+		"digitalproperty-network": "latest"
   }
 }
