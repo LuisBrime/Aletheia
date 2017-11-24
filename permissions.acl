@@ -115,7 +115,7 @@ rule EditarBloque {
   action: ALLOW
 }
 
-/**
+/***
 * Reglas sobre acceso
 **/
 
