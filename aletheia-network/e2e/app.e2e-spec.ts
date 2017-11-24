@@ -15,9 +15,9 @@ describe('Starting tests for aletheia-network', function() {
     })
   });
 
-  it('navbar-brand should be aletheia-network@0.2.0',() => {
+  it('navbar-brand should be aletheia-network@0.3.0',() => {
     var navbarBrand = element(by.css('.navbar-brand')).getWebElement();
-    expect(navbarBrand.getText()).toBe('aletheia-network@0.2.0');
+    expect(navbarBrand.getText()).toBe('aletheia-network@0.3.0');
   });
 
   

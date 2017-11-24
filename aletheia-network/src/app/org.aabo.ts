@@ -16,6 +16,7 @@ import {Event} from './org.hyperledger.composer.system';
       clienteKey: string;
       nombreDeCliente: string;
       domicilioDeCliente: Domicilio;
+      permisos: boolean[];
    }
    export class Administrador extends Cliente {
       adminKey: string;

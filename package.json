@@ -15,10 +15,10 @@
     "type": "git",
     "url": "https://github.com/LuisBrime/Aletheia.git"
   },
-	"scripts": {
-		"prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/aletheia-network.bna",
-		"ping": "composer network ping -n aletheia-network -p hlfv1 -i admin -s adminpw"
-	},
+  "scripts": {
+    "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/aletheia-network.bna",
+    "ping": "composer network ping -n aletheia-network -p hlfv1 -i admin -s adminpw"
+  },
   "license": "Apache-2.0",
   "dependencies": {
     "angular": "^1.6.6",
@@ -49,9 +49,9 @@
     "jsdoc": "^3.5.5",
     "license-check": "^1.1.5",
     "moment": "^2.17.1",
-		"prettyoutput": "^1.1.1",
+    "prettyoutput": "^1.1.1",
     "yargs": "^6.5.0",
-    "cli-table": "latest", 
-		"digitalproperty-network": "latest"
+    "cli-table": "latest",
+    "digitalproperty-network": "latest"
   }
 }

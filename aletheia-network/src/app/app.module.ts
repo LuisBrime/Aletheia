@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 
 import { contratoComponent } from './contrato/contrato.component';
 import { bloqueComponent } from './bloque/bloque.component';
+import { CuentahabienteComponent } from './cuentahabiente/cuentahabiente.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { bloqueComponent } from './bloque/bloque.component';
     // TransactionComponent,
     contratoComponent,
 		
-    bloqueComponent
+    bloqueComponent,
+		
+    CuentahabienteComponent
 		
   ],
   imports: [
